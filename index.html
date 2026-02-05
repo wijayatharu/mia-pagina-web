@@ -2,10 +2,100 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <title>La mia pagina</title>
+    <title>Happy Birthday</title>
+
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            overflow: hidden;
+            background: #fdfdfd;
+            font-family: "Georgia", serif;
+        }
+
+        /* Testo centrale */
+        .center-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 48px;
+            font-style: italic;
+            text-transform: uppercase;
+            color: black;
+            z-index: 10;
+        }
+
+        /* Palloncini */
+        .balloon {
+            position: absolute;
+            bottom: -150px;
+            width: 60px;
+            height: 80px;
+            border-radius: 50% 50% 50% 50%;
+            animation: floatUp linear infinite;
+            opacity: 0.9;
+        }
+
+        .balloon::after {
+            content: "";
+            position: absolute;
+            top: 80px;
+            left: 50%;
+            width: 2px;
+            height: 40px;
+            background: #555;
+        }
+
+        @keyframes floatUp {
+            from {
+                transform: translateY(0);
+            }
+            to {
+                transform: translateY(-120vh);
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Ciao, mi chiamo Mario</h1>
-    <p>Questa è la mia prima pagina web creata con VS Code.</p>
+
+    <div class="center-text">
+        Happy Birthday Viteri
+    </div>
+
+    <script>
+        const colors = [
+            "#ff6b6b",
+            "#feca57",
+            "#48dbfb",
+            "#1dd1a1",
+            "#c56cf0"
+        ];
+
+        function createBalloon() {
+            const balloon = document.createElement("div");
+            balloon.className = "balloon";
+
+            const size = Math.random() * 30 + 40;
+            balloon.style.width = size + "px";
+            balloon.style.height = size * 1.2 + "px";
+
+            balloon.style.left = Math.random() * 100 + "vw";
+            balloon.style.background = colors[Math.floor(Math.random() * colors.length)];
+
+            const duration = Math.random() * 5 + 6;
+            balloon.style.animationDuration = duration + "s";
+
+            document.body.appendChild(balloon);
+
+            setTimeout(() => {
+                balloon.remove();
+            }, duration * 1000);
+        }
+
+        // Crea palloncini quando si apre la pagina
+        setInterval(createBalloon, 400);
+    </script>
+
 </body>
 </html>
